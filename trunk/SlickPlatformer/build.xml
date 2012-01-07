@@ -1,0 +1,130 @@
+<!--
+  The Slick2D Build file. It has the following capabilities:
+  
+  dist - Build the complete distribution
+  build-key-store - Build a valid key store for distributing your game
+  sign-a-jar - Sign a JAR file for distribution using a key store generated here
+  
+  javadoc - generate the javadoc for Slick
+-->
+<project name="Platformer Example" default="build-game" basedir=".">
+	
+<!--
+ Initialise the build script
+-->
+<target name="init">
+	<property name="username" value="kevin"/>
+	<property name="host" value="bob.newdawnsoftware.com"/>
+	<property name="dir" value="/home/kevin/public_html/cokeandcode.com/demos/platformer"/>
+	<property name="webstartURL" value="http://www.cokeandcode.com/demos/platformer"/>
+	<property name="homepage" value="http://www.cokeandcode.com"/>
+	<property name="vendor" value="Coke And Code"/>
+	
+	<property name="build.dir" value="target"/>	
+	
+	<property name="game.name" value="platformer"/>
+	<property name="game.title" value="Platformer Demo"/>
+	<property name="game.mainclass" value="org.newdawn.hoorah.Hoorah"/>
+	
+	<property name="slick.install" value="../../workspace/Slick"/>
+	<property name="phys2d.install" value="../../workspace/phys2d"/>
+	
+	<delete dir="${build.dir}"/>
+	<mkdir dir="${build.dir}/classes"/>
+	<delete dir="webstart"/>
+	<mkdir dir="webstart"/>
+</target>
+	
+<!--
+ Build the java source to the Slick Demo Platformer
+-->
+<target name="build-game" depends="init">
+	<delete dir="lib/${game.name}.jar"/>
+	<javac debug="true" srcdir="src" destdir="${build.dir}/classes" target="1.5" source="1.5">
+		<src path="src"/>
+		<src path="${phys2d.install}/src"/>
+	    <classpath>
+		  <pathelement path="${slick.install}/lib/slick.jar"/>
+	      <pathelement path="${slick.install}/lib/lwjgl.jar"/>
+	      <pathelement path="${slick.install}/lib/ibxm.jar"/>
+	      <pathelement path="${slick.install}/lib/jogg-0.0.7.jar"/>
+	      <pathelement path="${slick.install}/lib/jorbis-0.0.15.jar"/>
+	    </classpath>
+	</javac>
+	<jar destfile="lib/${game.name}.jar" 
+		 basedir="${build.dir}/classes"/>
+	<jar update="true" destfile="lib/${game.name}.jar" 
+		 basedir="." includes="res/**"/>
+	
+	<zip destfile="platformer-src.zip">
+    	<fileset dir="src"/>
+    	<fileset dir="res"/>
+ 	</zip>
+</target>
+
+<target name="build-game-webstart" depends="build-game">
+	<input message="KeyStore:" addproperty="keystore.alias"/>
+	<input message="KeyStorePW:" addproperty="keystore.password"/>
+	
+	<copyandsign jar="${game.name}.jar"/>
+</target>
+
+<!--
+ Upload the Game demo to the Slick website
+-->
+<target name="upload-game-webstart" depends="build-game-webstart">
+	<input message="Upload password:" addproperty="password"/>
+	
+	<scp todir="${username}:${password}@${host}:${dir}" 
+		 file="webstart/${game.name}.jar"
+		 trust="true"
+		 port="122"
+		 verbose="true"/>
+</target>
+
+<!--
+ A macro to copy and sign a library for webstart distribution
+-->
+<macrodef name="copyandsign">
+   <attribute name="jar" default="NOT SET"/>
+   <sequential>
+		<copy file="lib/@{jar}" toDir="webstart"/>
+   		<signjar jar="webstart/@{jar}" keystore="${keystore.alias}.ks" storepass="${keystore.password}" alias="${keystore.alias}"/> 
+   </sequential>
+</macrodef>
+
+<!--
+ A macro to copy and preprocess the JNLP template for all webstart demos
+-->
+<macrodef name="createdemojnlp">
+   <attribute name="name" default="NOT SET"/>
+   <attribute name="title" default="NOT SET"/>
+   <attribute name="mainclass" default="NOT SET"/>
+   <attribute name="template" default="slickdemo.jnlp"/>
+   <attribute name="datajar" default="testdata.jar"/>
+   <attribute name="projectjar" default=""/>
+   <sequential>
+   		<delete file="webstart/@{name}.jnlp"/>
+		<copy file="${slick.install}/scripts/@{template}" toFile="webstart/@{name}.jnlp">
+			<filterchain>
+	           <replacetokens>
+		      		<token key="title" value="@{title}"/>
+		      		<token key="mainclass" value="@{mainclass}"/>
+		      		<token key="jnlpname" value="@{name}.jnlp"/>
+		      		<token key="homepage" value="${homepage}"/>
+		      		<token key="datajar" value="@{datajar}"/>
+		      		<token key="projectjar" value="@{projectjar}"/>
+		      		<token key="vendor" value="${vendor}"/>
+		      		<token key="codebase" value="${webstartURL}"/>
+	            </replacetokens>
+	        </filterchain>
+    	</copy>
+    	
+		<echo file="webstart/demos.txt" append="true">
+			&lt;a href="${webstartURL}/@{name}.jnlp"&gt; @{title} &lt;/a&gt;
+			&lt;br/&gt;
+		</echo>	 
+   </sequential>
+</macrodef>
+
+</project>

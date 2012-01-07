@@ -1,0 +1,99 @@
+<Level name="Totem">
+<Initial>
+<StaticBlock id="44" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="62" width="250" height="20" rot="22.239536" x="480.08597" y="663.8774" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="63" width="50" height="50" rot="21.99111" x="823.9726" y="703.0089" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Wedge id="65" width="70" height="40" rot="25.13253" x="214.62428" y="708.03424" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Block id="66" width="250" height="20" rot="21.761435" x="704.6357" y="689.81" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="68" width="70" height="40" rot="22.432764" x="263.30692" y="694.96783" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="69" width="70" height="40" rot="22.432604" x="255.24734" y="646.9227" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="70" width="50" height="50" rot="12.566463" x="443.3672" y="703.0077" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="71" width="50" height="50" rot="20.420233" x="333.35986" y="703.0054" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="72" width="100" height="30" rot="18.849556" x="92.73254" y="713.01" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="73" width="100" height="30" rot="22.489157" x="342.2472" y="652.1808" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="74" width="250" height="20" rot="22.007973" x="206.43791" y="603.4531" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="79" width="250" height="20" rot="22.00798" x="289.82446" y="584.86096" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Wedge id="81" width="70" height="40" rot="25.132761" x="888.65906" y="708.0" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Arc id="82" width="100" height="50" rot="12.566594" x="-304.2703" y="703.0062" >
+   <Color red="1.0" green="0.0" blue="1.0" />
+</Arc>
+<Arc id="83" width="100" height="50" rot="28.755087" x="867.8065" y="661.45825" >
+   <Color red="1.0" green="0.0" blue="1.0" />
+</Arc>
+
+</Initial>
+<Target key="70">
+<StaticBlock id="44" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="62" width="250" height="20" rot="21.991285" x="501.99915" y="668.01483" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="63" width="50" height="50" rot="21.99118" x="502.8682" y="703.00824" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Wedge id="65" width="70" height="40" rot="25.130728" x="405.8715" y="358.191" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Block id="66" width="250" height="20" rot="21.99133" x="501.22003" y="598.0294" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="68" width="70" height="40" rot="23.560438" x="396.44116" y="433.19028" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="69" width="70" height="40" rot="23.560453" x="601.6647" y="432.88385" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="70" width="50" height="50" rot="15.7081" x="601.36145" y="633.0384" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="71" width="50" height="50" rot="21.991161" x="400.60867" y="633.00525" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="72" width="100" height="30" rot="23.560404" x="499.1036" y="328.0532" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="73" width="100" height="30" rot="23.56038" x="503.81525" y="538.01227" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="74" width="250" height="20" rot="21.989653" x="501.70596" y="478.0234" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="79" width="250" height="20" rot="25.13127" x="497.08704" y="388.0474" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Wedge id="81" width="70" height="40" rot="25.131197" x="591.6013" y="357.90833" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Arc id="82" width="100" height="50" rot="25.131432" x="499.96777" y="253.05386" >
+   <Color red="1.0" green="0.0" blue="1.0" />
+</Arc>
+
+</Target>
+</Level>

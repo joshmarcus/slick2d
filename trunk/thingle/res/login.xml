@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dialog name="login" text="Login" modal="true" 
+		columns="2" top="4" left="4" bottom="4" right="4" gap="4" init="init(page)">
+	<label text="The Next Big Thing Login"/>	
+	<label/>
+	
+	<label text="Username:" colspan="2" alignment="left" />
+	<textfield name="login_name" colspan="2" valign="center" />
+	<label text="Password:" colspan="2" alignment="left" />
+	<passwordfield name="login_password" colspan="2" valign="center" />
+	
+	<label/>
+	<button name="login_button" text="Login" type="default" font="bold"
+			action="login(login, login_name.text, login_password.text)" />
+</dialog>

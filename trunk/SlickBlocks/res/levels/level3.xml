@@ -1,0 +1,90 @@
+<Level name="The Cage">
+<Initial>
+<StaticBlock id="33" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="34" width="50" height="50" rot="3.1416717" x="347.8293" y="703.00775" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="35" width="50" height="50" rot="3.1415894" x="706.76" y="703.0101" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="36" width="250" height="20" rot="3.4008434" x="443.04654" y="686.29584" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="37" width="250" height="20" rot="3.4008398" x="481.72604" y="675.8705" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="38" width="250" height="20" rot="3.4008288" x="472.42767" y="652.72186" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="39" width="250" height="20" rot="3.4008257" x="475.9531" y="632.97534" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="40" width="250" height="20" rot="3.4008293" x="475.7399" y="612.2345" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="41" width="250" height="20" rot="3.400828" x="475.97498" y="591.6152" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="42" width="70" height="40" rot="6.2831173" x="842.3543" y="708.01245" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="43" width="70" height="40" rot="-1.570845" x="177.67801" y="693.0091" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="44" width="70" height="40" rot="3.4008281" x="534.6924" y="576.16034" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Arc id="45" width="100" height="50" rot="2.5023692" x="685.91534" y="649.89124" >
+   <Color red="1.0" green="0.0" blue="1.0" />
+</Arc>
+<Block id="48" width="100" height="30" rot="2.5014925" x="644.4415" y="630.89923" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+
+</Initial>
+<Target key="36">
+<StaticBlock id="33" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="34" width="50" height="50" rot="3.1416981" x="396.32166" y="363.02774" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="35" width="50" height="50" rot="3.141578" x="602.19403" y="363.02417" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="36" width="250" height="20" rot="4.712004" x="389.08923" y="603.01953" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="37" width="250" height="20" rot="4.712225" x="446.88773" y="603.0131" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="38" width="250" height="20" rot="4.7121778" x="559.84766" y="603.0035" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="39" width="250" height="20" rot="4.7117577" x="503.8438" y="603.02704" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="40" width="250" height="20" rot="6.2832437" x="499.39557" y="468.03354" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="41" width="250" height="20" rot="4.7118034" x="611.7734" y="603.00275" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="42" width="70" height="40" rot="6.2832465" x="503.01553" y="438.0437" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="43" width="70" height="40" rot="-1.5708199" x="397.42664" y="423.04822" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="44" width="70" height="40" rot="4.7123904" x="602.4484" y="423.049" >
+   <Color red="0.0" green="1.0" blue="0.0" />
+</Block>
+<Arc id="45" width="100" height="50" rot="1.3370132E-4" x="502.6728" y="363.0514" >
+   <Color red="1.0" green="0.0" blue="1.0" />
+</Arc>
+<Block id="48" width="100" height="30" rot="3.1415415" x="502.62207" y="403.04984" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+
+</Target>
+</Level>

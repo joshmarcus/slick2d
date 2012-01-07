@@ -1,0 +1,60 @@
+<project name="slick-ae" default="build" basedir="." xmlns:artifact="urn:maven-artifact-ant">
+
+	<target name="init">
+		<property name="slick.install" value="../Slick"/>
+		<property name="build.dir" value="target"/>
+
+		<delete dir="${build.dir}"/>
+		<mkdir dir="${build.dir}\classes"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<delete dir="slick-ae.jar"/>
+		
+		<javac includes="org/newdawn/slick/**" srcdir="${slick.install}/src" debug="true" destdir="${build.dir}/classes">
+		    <classpath>
+		      <pathelement path="${slick.install}/lib/lwjgl.jar"/>
+		      <pathelement path="${slick.install}/lib/lwjgl_util_applet.jar"/>
+		      <pathelement path="${slick.install}/lib/ibxm.jar"/>
+		      <pathelement path="${slick.install}/lib/jnlp.jar"/>
+		      <pathelement path="${slick.install}/lib/jogg-0.0.7.jar"/>
+		      <pathelement path="${slick.install}/lib/jorbis-0.0.15.jar"/>
+		    </classpath>
+		</javac>
+		
+		<echo>Removing Replaced Classes</echo>
+		<delete verbose="true">
+			<fileset dir="${build.dir}/classes">
+			  	<include name="org/newdawn/slick/GameContainer.class"/>		
+			  	<include name="org/newdawn/slick/Input.class"/>		
+			  	<include name="org/newdawn/slick/Sound.class"/>		
+			  	<include name="org/newdawn/slick/Music.class"/>		
+			  	<include name="org/newdawn/slick/Input$*.class"/>		
+			  	<include name="org/newdawn/slick/opengl/ImageDataFactory.class"/>	
+			  	<include name="org/newdawn/slick/opengl/renderer/Renderer.class"/>			
+			</fileset>
+		</delete>
+		
+		<javac includes="**" debug="true" srcdir="src" destdir="${build.dir}/classes" listfiles="true">
+		    <classpath>
+			  <pathelement path="lib/gdx.jar"/>
+			  <pathelement path="lib/gdx-backend-lwjgl-cut.jar"/>
+			  <pathelement path="lib/gdx-backend-android.jar"/>
+			  <pathelement path="lib/android.jar"/>
+		      <pathelement path="${slick.install}/lib/lwjgl.jar"/>
+		      <pathelement path="${slick.install}/lib/lwjgl_util_applet.jar"/>
+		      <pathelement path="${slick.install}/lib/ibxm.jar"/>
+		      <pathelement path="${slick.install}/lib/jnlp.jar"/>
+		      <pathelement path="${slick.install}/lib/jogg-0.0.7.jar"/>
+		      <pathelement path="${slick.install}/lib/jorbis-0.0.15.jar"/>
+		    </classpath>
+		</javac>
+		
+		<jar destfile="${build.dir}/slick-ae.jar" 
+			 basedir="${build.dir}/classes" includes="**"/>
+		
+		<jar update="true" destfile="${build.dir}/slick-ae.jar" 
+			 basedir="src" includes="${slick.install}/org/newdawn/slick/data/*"/>
+	</target>
+	
+</project>

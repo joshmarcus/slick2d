@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<panel>
+   <panel border="true" pad="10">
+      <combobox selected="0" editable="false" name="resolutionList">
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+         <choice text="Test"/>
+      </combobox>
+   </panel>
+</panel>

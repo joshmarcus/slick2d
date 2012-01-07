@@ -1,0 +1,72 @@
+<Level name="My Fort">
+<Initial>
+<StaticBlock id="19" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="20" width="50" height="50" rot="-4.3840376E-9" x="210.0" y="703.07465" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="21" width="50" height="50" rot="7.8159314E-7" x="271.3333" y="703.2155" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="22" width="50" height="50" rot="-1.372394E-5" x="754.0883" y="703.0103" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="23" width="50" height="50" rot="-2.9638491E-5" x="847.6747" y="703.0041" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="24" width="100" height="30" rot="-1.1855618E-5" x="528.4891" y="713.008" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="25" width="100" height="30" rot="1.4610934E-5" x="390.88644" y="713.0089" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Wedge id="26" width="70" height="40" rot="0.0012627145" x="915.971" y="708.1851" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Wedge id="27" width="70" height="40" rot="6.2895417" x="109.56144" y="708.19135" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Block id="31" width="250" height="20" rot="8.520327E-5" x="539.9843" y="688.0141" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="32" width="250" height="20" rot="9.8706085E-5" x="526.0885" y="668.0211" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+
+</Initial>
+<Target key="22">
+<StaticBlock id="19" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="20" width="50" height="50" rot="1.1256615E-6" x="403.3622" y="513.04456" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="21" width="50" height="50" rot="6.0716276E-5" x="577.26794" y="513.0397" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="22" width="50" height="50" rot="6.810514E-6" x="404.09015" y="703.00885" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="23" width="50" height="50" rot="2.953831E-6" x="575.61914" y="703.00934" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="24" width="100" height="30" rot="1.5708715" x="403.62012" y="608.0261" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Block id="25" width="100" height="30" rot="1.5709002" x="576.48315" y="608.0269" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+<Wedge id="26" width="70" height="40" rot="-2.6833624E-4" x="578.3456" y="468.0717" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Wedge id="27" width="70" height="40" rot="6.283105" x="403.3017" y="468.0457" >
+   <Color red="1.0" green="0.0" blue="0.0" />
+</Wedge>
+<Block id="31" width="250" height="20" rot="-8.981356E-6" x="489.7869" y="548.0341" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="32" width="250" height="20" rot="3.3277781E-6" x="491.64215" y="668.0187" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+
+</Target>
+</Level>

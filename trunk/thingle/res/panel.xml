@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<dialog name="panelTest" text="Panel Test" modal="true" 
+		columns="1" top="0" left="0" bottom="0" right="0" gap="0" init="init(page)">
+	<panel width="300" height="300" renderer="org.newdawn.slick.thingle.demos.TestWidgetRenderer"/>
+</dialog>

@@ -1,0 +1,30 @@
+<Level name="Simple Start">
+<Initial>
+<StaticBlock id="33" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="34" width="50" height="50" rot="7.291527E-11" x="494.0" y="703.09625" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="35" width="250" height="20" rot="-1.395188E-9" x="699.0" y="718.0413" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="36" width="100" height="30" rot="-3.777981E-9" x="362.0" y="713.1747" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+
+</Initial>
+<Target key="34">
+<StaticBlock id="33" width="2024" height="50" x="-500" y="728" >
+</StaticBlock>
+<Block id="34" width="50" height="50" rot="1.0176926E-4" x="494.00003" y="703.0072" >
+   <Color red="1.0" green="1.0" blue="0.0" />
+</Block>
+<Block id="35" width="250" height="20" rot="1.0265189E-4" x="497.0075" y="638.02734" >
+   <Color red="0.0" green="1.0" blue="1.0" />
+</Block>
+<Block id="36" width="100" height="30" rot="1.02579535E-4" x="495.00568" y="663.0172" >
+   <Color red="0.0" green="0.0" blue="1.0" />
+</Block>
+
+</Target>
+</Level>

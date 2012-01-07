@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<panel top="100" left="100">
+   <panel background="#ff0000" scrollable="true" width="100" height="100">
+      <panel width="50" height="300" background="#000000" />
+   </panel>
+</panel>
