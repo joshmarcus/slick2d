@@ -347,9 +347,9 @@
 	    <fileset dir="lib" includes="pedigree.jar"/>
 	    <fileset dir="lib" includes="lwjgl.jar"/>
 	    <fileset dir="lib" includes="slick.jar"/>
-	    <zipfileset src="lib/natives-win32.jar"/>
-	    <zipfileset src="lib/natives-linux.jar"/>
-	    <zipfileset src="lib/natives-mac.jar"/>
+	    <zipfileset src="lib/windows_natives.jar"/>
+	    <zipfileset src="lib/linux_natives.jar"/>
+	    <zipfileset src="lib/macosx_natives.jar"/>
 	    <fileset dir="." includes="pedigree-readme.xml"/>
 	    <fileset dir="." includes="testdata/flame.xml"/>
 	    <fileset dir="." includes="testdata/smoke.xml"/>
@@ -468,9 +468,9 @@
 	<copyandsign jar="jogg-0.0.7"/>
 	<copyandsign jar="jinput"/>
 	<copyandsign jar="jorbis-0.0.15"/>
-	<copyandsignres jar="natives-linux"/>
-	<copyandsignres jar="natives-win32"/>
-	<copyandsignres jar="natives-mac"/>
+	<copyandsignres jar="linux_natives"/>
+	<copyandsignres jar="windows_natives"/>
+	<copyandsignres jar="macosx_natives"/>
 	<copyandsign jar="slick"/>
 	<copy file="webstart/slick.jar" toFile="webstart/slick-b${version.build}.jar"/>
 	<copyandsign jar="slick-examples"/>
