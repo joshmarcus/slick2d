@@ -46,23 +46,25 @@ public class TileSet {
 	public int tilesDown;
 	
 	/** The properties for each tile */
-	private HashMap props = new HashMap();
+	private HashMap<Integer, Properties> props = new HashMap<Integer, Properties>();
 	/** The padding of the tiles */
-	protected int tileSpacing = 0;
+	public int tileSpacing = 0;
 	/** The margin of the tileset */
-	protected int tileMargin = 0;
+	public int tileMargin = 0;
+	/** The image for this tileset */
+	public String imageref;
+	
 	
 	/**
 	 * Create a tile set based on an XML definition
 	 * 
 	 * @param element The XML describing the tileset
 	 * @param map The map this tileset was loaded from (gives context to paths)
-	 * @param loadImage True if we should load the image (useful in headless mode)
+	 * @param loadImage True if the images should be loaded, false if we're running somewhere images can't be loaded
 	 * @throws SlickException Indicates a failure to parse the tileset
 	 */
 	public TileSet(TiledMap map, Element element, boolean loadImage) throws SlickException {
 		this.map = map;
-		name = element.getAttribute("name");
 		firstGID = Integer.parseInt(element.getAttribute("firstgid"));
 		String source = element.getAttribute("source");
 		
@@ -78,6 +80,7 @@ public class TileSet {
 				throw new SlickException("Unable to load or parse sourced tileset: "+this.map.tilesLocation+"/"+source);
 			}
 		}
+		name = element.getAttribute("name");
         String tileWidthString = element.getAttribute("tilewidth");
         String tileHeightString = element.getAttribute("tileheight");
         if(tileWidthString.length() == 0 || tileHeightString.length() == 0) {
@@ -110,6 +113,7 @@ public class TileSet {
 		}
 
 		if (loadImage) {
+			imageref = map.getTilesLocation()+"/"+ref;
 			Image image = new Image(map.getTilesLocation()+"/"+ref,false,Image.FILTER_NEAREST,trans);
 			setTileSetImage(image);
 		}
@@ -179,6 +183,7 @@ public class TileSet {
 	 * @param image The image to use for this tileset
 	 */
 	public void setTileSetImage(Image image) {
+		
 		tiles = new SpriteSheet(image, tileWidth, tileHeight, tileSpacing, tileMargin); 
 		tilesAcross = tiles.getHorizontalCount();
 		tilesDown = tiles.getVerticalCount();

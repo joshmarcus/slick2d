@@ -27,8 +27,6 @@ import org.xml.sax.SAXException;
  * http://mapeditor.org/
  * 
  * @author kevin
- * @author Tiago Costa
- * @author Loads of others!
  */
 public class TiledMap {
 	/** Indicates if we're running on a headless system */
@@ -60,19 +58,11 @@ public class TiledMap {
 	protected Properties props;
 	
 	/** The list of tilesets defined in the map */
-	protected ArrayList tileSets = new ArrayList();
+	protected ArrayList<TileSet> tileSets = new ArrayList<TileSet>();
 	/** The list of layers defined in the map */
-	protected ArrayList layers = new ArrayList();
+	protected ArrayList<Layer> layers = new ArrayList<Layer>();
 	/** The list of object-groups defined in the map */
-    protected ArrayList objectGroups = new ArrayList();
-    
-    /** Indicates a orthogonal map */
-    protected static final int ORTHOGONAL = 1;
-    /** Indicates an isometric map */
-    protected static final int ISOMETRIC = 2;
-    
-    /** The orientation of this map */
-    protected int orientation;
+    protected ArrayList<ObjectGroup> objectGroups = new ArrayList<ObjectGroup>();
 
 	/** True if we want to load tilesets - including their image data */
 	private boolean loadTileSets = true;
@@ -361,18 +351,8 @@ public class TiledMap {
 	 */
 	public void render(int x,int y,int sx,int sy,int width,int height,int l,boolean lineByLine) {
 		Layer layer = (Layer) layers.get(l);
-		
-		switch(orientation){
-		case ORTHOGONAL:
-			for (int ty=0;ty<height;ty++) {
-				layer.render(x,y,sx,sy,width,ty,lineByLine, tileWidth, tileHeight);
-			}
-			break;
-		case ISOMETRIC:
-			renderIsometricMap(x,y,sx,sy,width, height, layer, lineByLine);
-			break;
-		default:
-			// log error or something
+		for (int ty=0;ty<height;ty++) {
+			layer.render(x,y,sx,sy,width,ty,lineByLine, tileWidth, tileHeight);
 		}
 	}
 	
@@ -389,93 +369,11 @@ public class TiledMap {
 	 * to render something else between lines (@see {@link #renderedLine(int, int, int)}
 	 */
 	public void render(int x,int y,int sx,int sy,int width,int height, boolean lineByLine) {
-		switch(orientation){
-		case ORTHOGONAL:
-			for (int ty=0;ty<height;ty++) {
-				for (int i=0;i<layers.size();i++) {
-					Layer layer = (Layer) layers.get(i);
-					layer.render(x,y,sx,sy,width, ty,lineByLine, tileWidth, tileHeight);
-				}
+		for (int ty=0;ty<height;ty++) {
+			for (int i=0;i<layers.size();i++) {
+				Layer layer = (Layer) layers.get(i);
+				layer.render(x,y,sx,sy,width, ty,lineByLine, tileWidth, tileHeight);
 			}
-			break;
-		case ISOMETRIC:
-			renderIsometricMap(x,y,sx,sy,width, height, null, lineByLine);
-			break;
-		default:
-			// log error or something
-		}
-	}
-	
-	/**
-	 * Render of isometric map renders.
-	 * 
-	 * @param x The x location to render at
-	 * @param y The y location to render at
-	 * @param sx The x tile location to start rendering
-	 * @param sy The y tile location to start rendering
-	 * @param width The width of the section to render (in tiles)
-	 * @param height The height of the section to render (in tiles)
-	 * @param layer if this is null all layers are rendered, if not only the selected layer is renderered
-	 * @param lineByLine True if we should render line by line, i.e. giving us a chance
-	 * to render something else between lines (@see {@link #renderedLine(int, int, int)}
-	 * 
-	 * TODO: [Isometric map] Render stuff between lines, concept of line differs from ortho maps
-	 */
-	protected void renderIsometricMap(int x,int y,int sx,int sy,int width,int height,Layer layer,boolean lineByLine){
-		ArrayList drawLayers = layers;
-		if(layer != null){
-			drawLayers = new ArrayList();
-			drawLayers.add(layer);
-		}
-		
-		int maxCount = width * height;
-		int allCount = 0;
-		
-		boolean allProcessed = false;
-		
-		int initialLineX = x;
-		int initialLineY = y;
-		
-		int startLineTileX = 0;
-		int startLineTileY = 0;
-		while(!allProcessed){
-		
-			int currentTileX = startLineTileX;
-			int currentTileY = startLineTileY;
-			int currentLineX = initialLineX;
-			
-			int min = 0;
-			if(height > width)
-				min = (startLineTileY < width-1) ? startLineTileY : (width - currentTileX < height) ? width - currentTileX-1 : width-1;
-			else
-				min = (startLineTileY < height-1) ? startLineTileY : (width - currentTileX < height) ? width - currentTileX-1 : height-1;
-			
-			for(int burner = 0;burner <= min; currentTileX++, currentTileY--, burner++ ){
-				for (int layerIdx=0;layerIdx<drawLayers.size();layerIdx++) {
-					Layer currentLayer = (Layer) drawLayers.get(layerIdx);
-					currentLayer.render(currentLineX,initialLineY,currentTileX,currentTileY,1, 0,lineByLine, tileWidth, tileHeight);
-				}
-				currentLineX += tileWidth;
-				
-				allCount++;
-			}
-			
-			//System.out.println("Line : " + counter++  + " - " + count + "allcount : " + allCount);
-			
-			
-			
-			if(startLineTileY < (height-1)){
-				startLineTileY += 1;
-				initialLineX -= tileWidth/2;
-				initialLineY += tileHeight/2;
-			}else{
-				startLineTileX += 1;
-				initialLineX += tileWidth/2;
-				initialLineY += tileHeight/2;
-			}
-			
-			if(allCount >= maxCount)
-				allProcessed = true;
 		}
 	}
 	
@@ -486,20 +384,6 @@ public class TiledMap {
 	 */
 	public int getLayerCount() {
 		return layers.size();
-	}
-	
-	/**
-	 * Save parser for strings to ints
-	 * 
-	 * @param value The string to parse
-	 * @return The integer to parse or zero if the string isn't an int
-	 */
-	private int parseInt(String value) {
-		try {
-			return Integer.parseInt(value);
-		} catch (NumberFormatException e) {
-			return 0;
-		}
 	}
 	
 	/**
@@ -526,19 +410,15 @@ public class TiledMap {
 			Document doc = builder.parse(in);
 			Element docElement = doc.getDocumentElement();
 			
-			if ( docElement.getAttribute("orientation").equals("orthogonal") )
-				orientation = ORTHOGONAL;
-			else 
-				orientation = ISOMETRIC;
-			/*
+			String orient = docElement.getAttribute("orientation");
 			if (!orient.equals("orthogonal")) {
 				throw new SlickException("Only orthogonal maps supported, found: "+orient);
-			}*/
+			}
 			
-			width = parseInt(docElement.getAttribute("width"));
-			height = parseInt(docElement.getAttribute("height"));
-			tileWidth = parseInt(docElement.getAttribute("tilewidth"));
-			tileHeight = parseInt(docElement.getAttribute("tileheight"));
+			width = Integer.parseInt(docElement.getAttribute("width"));
+			height = Integer.parseInt(docElement.getAttribute("height"));
+			tileWidth = Integer.parseInt(docElement.getAttribute("tilewidth"));
+			tileHeight = Integer.parseInt(docElement.getAttribute("tileheight"));
 			
 			// now read the map properties
 			Element propsElement = (Element) docElement.getElementsByTagName("properties").item(0);
@@ -581,7 +461,6 @@ public class TiledMap {
 				Element current = (Element) layerNodes.item(i);
 				Layer layer = new Layer(this, current);
 				layer.index = i;
-				
 				layers.add(layer);
 			}
 			
@@ -590,7 +469,7 @@ public class TiledMap {
 			     
 			for (int i=0;i<objectGroupNodes.getLength();i++) {
 				Element current = (Element) objectGroupNodes.item(i);
-				ObjectGroup objectGroup = new ObjectGroup(current);
+				ObjectGroup objectGroup = new ObjectGroup(current,this);
 				objectGroup.index = i;
 			        
 				objectGroups.add(objectGroup);
@@ -843,130 +722,6 @@ public class TiledMap {
 		return def;
 	}
 	
-	/**
-	 * A group of objects on the map (objects layer)
-	 *
-	 * @author kulpae
-	 */
-	protected class ObjectGroup {
-	  /** The index of this group */
-	  public int index;
-	  /** The name of this group - read from the XML */
-	  public String name;
-	  /** The Objects of this group*/
-	  public ArrayList objects;
-	  /** The width of this layer */
-	  public int width;
-	  /** The height of this layer */
-	  public int height;
-	  
-	  /** the properties of this group */
-	  public Properties props;
-	  
-	  /**
-	   * Create a new group based on the XML definition
-	   *
-	   * @param element The XML element describing the layer
-	   * @throws SlickException Indicates a failure to parse the XML group
-	   */
-	  public ObjectGroup(Element element) throws SlickException {
-			name = element.getAttribute("name");
-			width = Integer.parseInt(element.getAttribute("width"));
-			height = Integer.parseInt(element.getAttribute("height"));
-			objects = new ArrayList();
-
-			// now read the layer properties
-			Element propsElement = (Element) element.getElementsByTagName(
-					"properties").item(0);
-			if (propsElement != null) {
-				NodeList properties = propsElement
-						.getElementsByTagName("property");
-				if (properties != null) {
-					props = new Properties();
-					for (int p = 0; p < properties.getLength(); p++) {
-						Element propElement = (Element) properties.item(p);
-
-						String name = propElement.getAttribute("name");
-						String value = propElement.getAttribute("value");
-						props.setProperty(name, value);
-					}
-				}
-			}
-
-			NodeList objectNodes = element.getElementsByTagName("object");
-			for (int i = 0; i < objectNodes.getLength(); i++) {
-				Element objElement = (Element) objectNodes.item(i);
-				GroupObject object = new GroupObject(objElement);
-				object.index = i;
-				objects.add(object);
-			}
-		}
-	}
+		
 	
-	/**
-	 * An object from a object-group on the map
-	 * 
-	 * @author kulpae
-	 */
-	protected class GroupObject {
-	  /** The index of this object */
-	  public int index;
-	  /** The name of this object - read from the XML */
-	  public String name;
-	  /** The type of this object - read from the XML */
-	  public String type;
-	  /** The x-coordinate of this object */
-	  public int x;
-	  /** The y-coordinate of this object */
-	  public int y;
-	  /** The width of this object */
-	  public int width;
-	  /** The height of this object */
-	  public int height;
-	  /** The image source */
-	  private String image;
-	  
-	  /** the properties of this group */
-	  public Properties props;
-	
-	 /**
-	 * Create a new group based on the XML definition
-	 *
-	 * @param element The XML element describing the layer
-	 * @throws SlickException Indicates a failure to parse the XML group
-	 */
-	 public GroupObject(Element element) throws SlickException {
-			name = element.getAttribute("name");
-			type = element.getAttribute("type");
-			x = Integer.parseInt(element.getAttribute("x"));
-			y = Integer.parseInt(element.getAttribute("y"));
-			width = Integer.parseInt(element.getAttribute("width"));
-			height = Integer.parseInt(element.getAttribute("height"));
-
-			Element imageElement = (Element) element.getElementsByTagName(
-					"image").item(0);
-			if (imageElement != null) {
-				image = imageElement.getAttribute("source");
-			}
-			
-			// now read the layer properties
-			Element propsElement = (Element) element.getElementsByTagName(
-					"properties").item(0);
-			if (propsElement != null) {
-				NodeList properties = propsElement
-						.getElementsByTagName("property");
-				if (properties != null) {
-					props = new Properties();
-					for (int p = 0; p < properties.getLength(); p++) {
-						Element propElement = (Element) properties.item(p);
-
-						String name = propElement.getAttribute("name");
-						String value = propElement.getAttribute("value");
-						props.setProperty(name, value);
-					}
-				}
-			}
-		}
-	}
-	   
 }

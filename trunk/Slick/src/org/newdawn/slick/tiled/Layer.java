@@ -2,6 +2,7 @@ package org.newdawn.slick.tiled;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
@@ -14,7 +15,7 @@ import org.w3c.dom.NodeList;
 /**
  * A layer of tiles on the map
  *
- * @author kevin
+ * @author kevin || liamzebedee
  */
 public class Layer {
 	/** The code used to decode Base64 encoding */
@@ -52,6 +53,9 @@ public class Layer {
 	/** the properties of this layer */
 	public Properties props;
 	
+	/** The TiledMapPlus of this layer */
+	private TiledMapPlus tmap;
+	
 	/**
 	 * Create a new layer based on the XML definition
 	 * 
@@ -61,6 +65,9 @@ public class Layer {
 	 */
 	public Layer(TiledMap map, Element element) throws SlickException {
 		this.map = map;
+		if(map instanceof TiledMapPlus){
+			tmap = (TiledMapPlus) map;
+		}
 		name = element.getAttribute("name");
 		width = Integer.parseInt(element.getAttribute("width"));
 		height = Integer.parseInt(element.getAttribute("height"));
@@ -152,9 +159,9 @@ public class Layer {
         } else {
             TileSet set = map.findTileSet(tile);
             
-            data[x][y][0] = set.index;
-            data[x][y][1] = tile - set.firstGID;
-            data[x][y][2] = tile;
+            data[x][y][0] = set.index; //tileSetIndex
+            data[x][y][1] = tile - set.firstGID; //localID
+            data[x][y][2] = tile; //globalID
         }
 	}
 	
@@ -267,4 +274,108 @@ public class Layer {
 
 		return out;
 	}
+    
+    /**
+     * Gets all Tiles from this layer, formatted into Tile objects
+	 * Can only be used if the layer was loaded using TiledMapPlus
+     * 
+     * @author liamzebedee
+	 * @throws SlickException 
+     */
+    public ArrayList<Tile> getTiles() throws SlickException{ 
+		if(tmap == null){
+			throw new SlickException("This method can only be used with Layers loaded using TiledMapPlus");
+		}
+    	ArrayList<Tile> tiles = new ArrayList<Tile>();
+    	for (int x = 0; x < this.width; x++) {
+			for (int y = 0; y < this.height; y++) {
+				String tilesetName = tmap.tileSets.get(this.data[x][y][0]).name;
+				Tile t = new Tile(x, y, this.name, y, tilesetName);
+				tiles.add(t);
+			}
+		}
+    	return tiles;
+    }
+    
+	/**
+	 * Get all tiles from this layer that are part of a tileset
+	 * Can only be used if the layer was loaded using TiledMapPlus
+	 * 
+	 * @author liamzebedee
+	 * @param tilesetName The name of the tileset that the tiles are part of
+	 * @throws SlickException 
+	 */
+	public ArrayList<Tile> getTilesOfTileset(String tilesetName) throws SlickException{ 
+		if(tmap == null){
+			throw new SlickException("This method can only be used with Layers loaded using TiledMapPlus");
+		}
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		int tilesetID = tmap.getTilesetID(tilesetName);
+		for (int x = 0; x < tmap.getWidth(); x++) {
+			for (int y = 0; y < tmap.getHeight(); y++) {
+				if(this.data[x][y][0] == tilesetID){
+					Tile t = new Tile(x,y,this.name,this.data[x][y][1],tilesetName);
+					tiles.add(t);
+				}
+			}
+		}
+		return tiles;
+	}
+	
+	/**
+	 * Removes a tile
+	 * 
+	 * @author liamzebedee
+	 * @param x Tile X
+	 * @param y Tile Y
+	*/
+	public void removeTile(int x, int y){
+		this.data[x][y][0] = -1;
+	}
+	
+	/**
+	 * Sets a tile's tileSet
+	 * Can only be used if the layer was loaded using TiledMapPlus
+	 * 
+	 * @author liamzebedee
+	 * @param x Tile X
+	 * @param y Tile Y
+	 * @param tileOffset The offset of the tile, within the tileSet to set this tile to, ordered in rows
+	 * @param tilesetName The name of the tileset to set the tile to
+	 * @throws SlickException 
+	*/
+	public void setTile(int x,int y,int tileOffset,String tilesetName) throws SlickException{
+		if(tmap == null){
+			throw new SlickException("This method can only be used with Layers loaded using TiledMapPlus");
+		}
+		int tilesetID = tmap.getTilesetID(tilesetName);
+		TileSet tileset = tmap.getTileSet(tilesetID);
+		this.data[x][y][0] = tileset.index; //tileSetIndex
+		this.data[x][y][1] = tileOffset; //localID
+		this.data[x][y][2] = tileset.firstGID + tileOffset; //globalID
+	}
+	
+	/**
+	 * Returns true if this tile is part of that tileset
+	 * Can only be used if the layer was loaded using TiledMapPlus
+	 * 
+	 * @author liamzebedee
+	 * @param x The x co-ordinate of the tile
+	 * @param y The y co-ordinate of the tile
+	 * @param tilesetName The name of the tileset, to check if the tile is part of
+	 * @throws SlickException 
+	 */
+	public boolean isTileOfTileset(int x, int y, String tilesetName) throws SlickException{
+		if(tmap == null){
+			throw new SlickException("This method can only be used with Layers loaded using TiledMapPlus");
+		}
+		int tilesetID = tmap.getTilesetID(tilesetName);
+			if(this.data[x][y][0] == tilesetID){
+				return true;
+			}
+		return false;
+	}
+    
+    
+    
 }
